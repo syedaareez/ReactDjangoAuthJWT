@@ -2,7 +2,6 @@ import React from "react";
 import Nav from "../components/Nav";
 import LoginForm from '../components/LoginForm';
 import SignupForm from '../components/SignupForm';
-import Successful from './successful';
 import Home from "../components/Home";
 
 class LoginSign extends React.Component {
@@ -13,6 +12,8 @@ class LoginSign extends React.Component {
       logged_in: localStorage.getItem('token') ? true : false,
       username: '',
         error:false,
+        nosign:false,
+        showform:true,
     };
   }
 
@@ -30,7 +31,7 @@ class LoginSign extends React.Component {
     }
   }
 
-  handle_login = (e, data) => {
+handle_login = (e, data) => {
     e.preventDefault();
     fetch('http://127.0.0.1:8000/token-auth/', {
       method: 'POST',
@@ -48,6 +49,7 @@ class LoginSign extends React.Component {
           displayed_form: '',
           username: json.user.username,
             error:false,
+            showform:false,
         });
            var form=null;
         }else{
@@ -58,15 +60,13 @@ class LoginSign extends React.Component {
       });
   };
 
-  handle_logout = () => {
+handle_logout = () => {
     localStorage.removeItem('token');
-    this.setState({ logged_in: false, username: '' });
+    this.setState({ logged_in: false, username: '' ,showform:true,});
   };
- handle_home=()=>{
-     this.setState({ logged_in: false, username: '' });
- }
 
-  handle_signup = (e, data) => {
+handle_signup = (e, data) => {
+    
     e.preventDefault();
     fetch('http://127.0.0.1:8000/core/users/', {
       method: 'POST',
@@ -77,13 +77,21 @@ class LoginSign extends React.Component {
     })
       .then(res => res.json())
       .then(json => {
+        if(json.username[0]!=="A user with that username already exists."){
         localStorage.setItem('token', json.token);
         this.setState({
           logged_in: true,
           displayed_form: '',
           username: json.username,
-        });
+            nosign:false,
+            showform:false,
+        });}else{
+        this.setState({
+          nosign:true,
+        })
+    }
       });
+    
   };
 
   display_form = form => {
@@ -101,16 +109,17 @@ class LoginSign extends React.Component {
                 form = <LoginForm handle_login={this.handle_login} handleError={this.state.error} />;
                 break;
               case 'signup':
-                form = <SignupForm handle_signup={this.handle_signup} />;
+                form = <SignupForm handle_signup={this.handle_signup} Nosign={this.state.nosign} />;
                 break;
               default:
-                form = <SignupForm handle_signup={this.handle_signup} />;
+                form = <SignupForm handle_signup={this.handle_signup} Nosign={this.state.nosign}/>;
             }
 
         
           return (
               <div>
-            <div className="login-sign-page">
+              {this.state.showform?
+            (<div className="login-sign-page">
               <div className="login-sign">
                 <Nav
                   logged_in={this.state.logged_in}
@@ -119,12 +128,15 @@ class LoginSign extends React.Component {
                 />
                 
                 {this.state.logged_in
-                ? (<Successful home={this.handle_home} user={this.state.username}/>)
+                ? ''
                 : (<div>{form}</div>)}
               </div>
               
             </div>
                    
+            ):
+            (<div><Home logout={this.handle_logout}/></div>)
+            }
             </div>
           );
     }

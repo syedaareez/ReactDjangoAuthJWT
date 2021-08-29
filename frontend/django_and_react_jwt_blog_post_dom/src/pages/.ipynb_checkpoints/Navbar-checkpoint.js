@@ -43,7 +43,9 @@ export const Navbar = (props) => {
             <Link>three</Link>
             <Link>four</Link>
           </div>
-            
+            <div>
+              <Link onClick={props.logout} to="/">Log out</Link>
+              </div>
         </div>
       </nav>
     </div>

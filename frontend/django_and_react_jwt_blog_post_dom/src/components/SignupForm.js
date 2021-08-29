@@ -40,6 +40,8 @@ class SignupForm extends React.Component {
           onChange={this.handle_change}
         />
         <input type="submit" className='submit-btn' />
+        <br />
+        {this.props.Nosign?(<p className="wrong">Username already Exists</p>):``}
       </form>
     );
   }

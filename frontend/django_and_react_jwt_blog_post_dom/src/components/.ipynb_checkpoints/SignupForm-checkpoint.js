@@ -19,23 +19,29 @@ class SignupForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={e => this.props.handle_signup(e, this.state)}>
-        <h4>Sign Up</h4>
-        <label htmlFor="username">Username</label>
+      <form onSubmit={e => this.props.handle_signup(e, this.state)} className='form'>
+       <h2>Create your Account</h2>
+        {/* <label htmlFor="username">Username</label> */}
         <input
+        className='input'
           type="text"
           name="username"
+          placeholder="username"
           value={this.state.username}
           onChange={this.handle_change}
         />
-        <label htmlFor="password">Password</label>
+        {/* <label htmlFor="password">Password</label> */}
         <input
+        className='input'
           type="password"
           name="password"
+          placeholder="password"
           value={this.state.password}
           onChange={this.handle_change}
         />
-        <input type="submit" />
+        <input type="submit" className='submit-btn' />
+        <br />
+        {this.props.Nosign?(<p className="wrong">Username already Exists</p>):``}
       </form>
     );
   }
