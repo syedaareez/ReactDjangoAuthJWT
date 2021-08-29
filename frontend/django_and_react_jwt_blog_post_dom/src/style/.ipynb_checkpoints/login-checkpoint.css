@@ -1,0 +1,60 @@
+.login-sign-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    min-height: 600px;
+    width: 100%;
+    font-family: var(--heading-font-family);
+}
+.login-sign {
+    width: 400px;
+    height: 400px;
+    box-shadow: 7px 7px 14px #e4e4e7, -7px -7px 14px #fcfcff;
+    padding: 20px;
+    
+  }
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.form h2{
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+form .input{
+    background-color: var(--main-white);
+    padding: 15px 30px;
+    width: 250px;
+    font-size: 20px;
+    margin-bottom: 25px;
+    box-shadow: inset 5px 5px 10px #e4e4e7,
+    inset -5px -5px 10px #fcfcff;
+    border: none;
+    border-radius: 10px;
+}
+.input:focus{
+border: none;
+outline: none;
+}
+.submit-btn{
+    padding: 10px 30px;
+    border: none;
+    width: 250px;
+    font-size: 20px;
+    background-color: var(--primary-color);
+    color: var(--main-white);
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px #BABECC,
+    -5px -5px 10px #ffffff73;
+}
+.wrong{
+    color:red;
+    text-align:center;
+}
+.successWrapper{
+    text-align:center;
+}
