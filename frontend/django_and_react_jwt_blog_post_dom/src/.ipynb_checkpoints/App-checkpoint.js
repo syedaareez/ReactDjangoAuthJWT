@@ -10,7 +10,8 @@ class App extends Component {
     this.state = {
       displayed_form: '',
       logged_in: localStorage.getItem('token') ? true : false,
-      username: ''
+      username: '',
+        error:false,
     };
   }
 
@@ -40,11 +41,18 @@ class App extends Component {
       .then(res => res.json())
       .then(json => {
         localStorage.setItem('token', json.token);
+        if(json.user){
         this.setState({
           logged_in: true,
           displayed_form: '',
-          username: json.user.username
+          username: json.user.username,
+            error:false,
         });
+        }else{
+            this.setState({
+                error:true,
+            })
+        }
       });
   };
 
@@ -68,7 +76,7 @@ class App extends Component {
         this.setState({
           logged_in: true,
           displayed_form: '',
-          username: json.username
+          username: json.username,
         });
       });
   };
@@ -83,7 +91,7 @@ class App extends Component {
     let form;
     switch (this.state.displayed_form) {
       case 'login':
-        form = <LoginForm handle_login={this.handle_login} />;
+        form = <LoginForm handle_login={this.handle_login} handleError={this.state.error} />;
         break;
       case 'signup':
         form = <SignupForm handle_signup={this.handle_signup} />;
