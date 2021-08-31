@@ -2,16 +2,16 @@ import React from "react";
 import Nav from "../components/Nav";
 import LoginForm from '../components/LoginForm';
 import SignupForm from '../components/SignupForm';
-// import Successful from './successful';
 import Home from "../components/Home";
 
 class LoginSign extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+        token:null,
       displayed_form: '',
       logged_in: localStorage.getItem('token') ? true : false,
-      username: '',
+          username: '',
         error:false,
         nosign:false,
         showform:true,
@@ -43,9 +43,11 @@ handle_login = (e, data) => {
     })
       .then(res => res.json())
       .then(json => {
-        localStorage.setItem('token', json.token);
+        
         if(json.user){
+        localStorage.setItem('token', json.token);
         this.setState({
+          token:json.token,
           logged_in: true,
           displayed_form: '',
           username: json.user.username,
@@ -53,6 +55,7 @@ handle_login = (e, data) => {
             showform:false,
         });
            var form=null;
+            console.log(this.state.token)
         }else{
             this.setState({
                 error:true,
@@ -136,7 +139,7 @@ handle_signup = (e, data) => {
             </div>
                    
             ):
-            (<div><Home logout={this.handle_logout}/></div>)
+            (<div><Home logout={this.handle_logout} token={this.state.token} /></div>)
             }
             </div>
           );

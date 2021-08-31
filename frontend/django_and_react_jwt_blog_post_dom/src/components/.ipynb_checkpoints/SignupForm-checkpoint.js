@@ -39,9 +39,10 @@ class SignupForm extends React.Component {
           value={this.state.password}
           onChange={this.handle_change}
         />
-        <input type="submit" className='submit-btn' />
+        <input type="submit" className='submit-btn' value="SignUp"/>
         <br />
         {this.props.Nosign?(<p className="wrong">Username already Exists</p>):``}
+         <br />
       </form>
     );
   }

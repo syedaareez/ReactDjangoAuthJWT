@@ -14,12 +14,16 @@ export const Navbar = (props) => {
     setIsOpen(false);
     document.removeEventListener("click", onClickOutsideListener);
   };
+    
+  
+    
   return (
     <div>
       <nav>
         <button className="hamburger" onClick={() => openMenu()}>
           <GiHamburgerMenu />
         </button>
+        <button >Create</button>
         <p>Classroom</p>
         <div
           className={isOpen ? "nav-links open" : "nav-links"}
@@ -28,6 +32,7 @@ export const Navbar = (props) => {
           }}
         >
           <div className="main-links">
+            
             <Link>
               {" "}
               <AiFillHome className="icon" /> Classroom

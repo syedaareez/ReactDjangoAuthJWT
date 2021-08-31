@@ -1,11 +1,30 @@
-import React from 'react';
+import React,{useState} from 'react';
 import PropTypes from 'prop-types';
+import "../style/login.css"
 
 function Nav(props) {
+    const [signClicked, setSignClicked] = useState(false)
+    
+  
+  const login=()=>{
+      props.display_form('login')
+      setSignClicked(true)
+      
+      
+  }
+  const signup=()=>{
+      props.display_form('signup')
+      
+      
+           setSignClicked(false)
+      
+  }
+    
   const logged_out_nav = (
-    <ul>
-      <li onClick={() => props.display_form('login')}>login</li>
-      <li onClick={() => props.display_form('signup')}>signup</li>
+    <ul className="nav-entry">
+      <li className={signClicked?'':'inset'} onClick={()=>signup()} >signup</li>
+      <li className={signClicked?'inset':''} onClick={()=>login()} >login</li>
+      
     </ul>
   );
 
@@ -19,3 +38,4 @@ Nav.propTypes = {
   display_form: PropTypes.func.isRequired,
   handle_logout: PropTypes.func.isRequired
 };
+

@@ -41,10 +41,11 @@ class LoginForm extends React.Component {
           value={this.state.password}
           onChange={this.handle_change}
         />
-        <input type="submit" className='submit-btn' />
+        <input type="submit" className='submit-btn' value="LogIn" />
       </form>
       <br />
       {this.props.handleError?(<p className="wrong">Wrong Credentials</p>):``}
+       <br />
     </div>
     );
   }

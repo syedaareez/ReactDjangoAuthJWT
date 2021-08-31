@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaUser,FaUserGraduate } from 'react-icons/fa'
 import '../style/landing.css'
-export const Landing = () => {
+export const Landing = (props) => {
     return (
         <div className='landing'>
             <div className="landing-wrapper">
@@ -13,6 +13,7 @@ export const Landing = () => {
               <Link to='/loginSign' className="student-btn"> <FaUserGraduate className='l-icon'/>Student</Link>
             </div>
             </div>
+       <div onClick={props.logout}>LOGOUT</div>
         </div>
     )
 }

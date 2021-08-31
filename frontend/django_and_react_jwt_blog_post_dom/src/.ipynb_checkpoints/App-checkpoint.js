@@ -18,15 +18,12 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Landing />
+            <Landing logout={this.handle_logout} />
+            
           </Route>
         
           <Route path='/loginSign'>
            <LoginSign />
-          </Route>
-          
-         <Route exact path='/home'>
-            <Home logout={this.handle_logout} />
           </Route>
         
         </Switch>

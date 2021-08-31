@@ -4,9 +4,34 @@ from rest_framework import permissions, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserSerializer, UserSerializerWithToken
+from .serializers import UserSerializer, UserSerializerWithToken, joinSerializer
+from .models import Subject
+from rest_framework.permissions import IsAuthenticated
 
+@api_view(['POST'])
+def CreateSubject(request):
+    
+    serializer = createSerializer(data=request.data)
 
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def JoinSubject(request,pk):
+    
+    permission_classes = (IsAuthenticated,)
+    content=Subject.objects.get(code=pk)
+    
+    serializer = joinSerializer(instance=content, data=request.data )
+    if serializer.is_valid():
+        print(pk,content,serializer.data)
+        return Response(serializer.data)
+    print(serializer.errors)
+    return Response(serializer.errors)
+
+    
 @api_view(['GET'])
 def current_user(request):
     """

@@ -18,7 +18,8 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Landing />
+            <Landing logout={this.handle_logout} />
+            
           </Route>
         
           <Route path='/loginSign'>
