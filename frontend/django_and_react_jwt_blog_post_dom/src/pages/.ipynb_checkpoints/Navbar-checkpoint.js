@@ -23,7 +23,7 @@ export const Navbar = (props) => {
         <button className="hamburger" onClick={() => openMenu()}>
           <GiHamburgerMenu />
         </button>
-        <button >Create</button>
+        <button className="submit-btn" onClick={()=>props.setModalOpen(!props.modalOpen)} >Create</button>
         <p>Classroom</p>
         <div
           className={isOpen ? "nav-links open" : "nav-links"}

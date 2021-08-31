@@ -1,0 +1,27 @@
+.subject-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.subjects{
+    font-family: var(--heading-font-family);
+    width: 200px;
+    height: 200px;
+    color: var(--primary-color);
+    box-shadow: 10px 10px 20px #d8d8db, -10px -10px 20px #ffffff;
+    margin: 50px;
+    text-transform: capitalize;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.title{
+    font-size: 2rem;
+    font-weight: bolder;
+}
+.author{
+    font-size: 1.5rem;
+    font-weight: bold;
+}

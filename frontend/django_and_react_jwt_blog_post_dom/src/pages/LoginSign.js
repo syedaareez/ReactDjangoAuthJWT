@@ -8,17 +8,15 @@ class LoginSign extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        token:null,
       displayed_form: '',
       logged_in: localStorage.getItem('token') ? true : false,
           username: '',
         error:false,
         nosign:false,
-        showform:true,
     };
   }
 
-  componentDidMount() {
+componentDidMount() {
     if (this.state.logged_in) {
       fetch('http://127.0.0.1:8000/core/current_user/', {
         headers: {
@@ -52,7 +50,6 @@ handle_login = (e, data) => {
           displayed_form: '',
           username: json.user.username,
             error:false,
-            showform:false,
         });
            var form=null;
         }else{
@@ -87,7 +84,6 @@ handle_signup = (e, data) => {
           displayed_form: '',
           username: json.username,
             nosign:false,
-            showform:false,
         });}else{
         this.setState({
           nosign:true,
@@ -105,7 +101,7 @@ handle_signup = (e, data) => {
 
     
     render(){
-        
+           
            let form;
             switch (this.state.displayed_form) {
               case 'login':
@@ -121,7 +117,8 @@ handle_signup = (e, data) => {
         
           return (
               <div>
-              {this.state.showform?
+              {this.state.logged_in?
+            (<div><Home logout={this.handle_logout} /></div>):
             (<div className="login-sign-page">
               <div className="login-sign">
                 <Nav
@@ -137,8 +134,7 @@ handle_signup = (e, data) => {
               
             </div>
                    
-            ):
-            (<div><Home logout={this.handle_logout} token={this.state.token} /></div>)
+            )
             }
             </div>
           );

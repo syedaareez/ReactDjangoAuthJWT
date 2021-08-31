@@ -10,8 +10,8 @@ from rest_framework.permissions import IsAuthenticated
 
 @api_view(['POST'])
 def CreateSubject(request):
-    
-    serializer = createSerializer(data=request.data)
+    permission_classes = (IsAuthenticated,)
+    serializer = joinSerializer(data=request.data)
 
     if serializer.is_valid():
         serializer.save()
@@ -26,7 +26,6 @@ def JoinSubject(request,pk):
     
     serializer = joinSerializer(instance=content, data=request.data )
     if serializer.is_valid():
-        print(pk,content,serializer.data)
         return Response(serializer.data)
     print(serializer.errors)
     return Response(serializer.errors)
