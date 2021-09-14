@@ -1,17 +1,10 @@
 import React from "react";
-import { Subjects } from '../pages/Subjects'
-let classes = localStorage.getItem('classes')
-let classArray = []
-if(classes)
-{
-  classArray = JSON.parse(localStorage.getItem('classes'))
-}
+
+
 class JoinForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      joined: [],
-      joinedclasses: classArray,
       activeItem: {
         code: "",
         username: "",
@@ -49,10 +42,8 @@ class JoinForm extends React.Component {
       },
     })
       .then((response) => response.json())
-      .then((data) =>
+      .then(
         this.setState({
-          joined: data,
-          joinedclasses: [...this.state.joinedclasses, data],
           activeItem: {
             code: "",
           },
@@ -61,11 +52,6 @@ class JoinForm extends React.Component {
   }
 
   render() {
-    var Joinedclasses = this.state.joinedclasses;
-    let jsonObject = Joinedclasses.map(JSON.stringify);
-    let uniqueSet = new Set(jsonObject);
-    let uniqueArray = Array.from(uniqueSet).map(JSON.parse);
-    localStorage.setItem('classes',JSON.stringify(uniqueArray))
     return (
       <div>
         <div className="createFormWrapper">
@@ -88,22 +74,7 @@ class JoinForm extends React.Component {
                 />
               </form>
             </div>
-            {/* {uniqueArray ? (
-              <div>
-                {uniqueArray.map(function (joinedclass,index) {
-                  return (
-                    <div key={index}>
-                      <h1>{joinedclass.title}</h1>
-                      <h2>{joinedclass.author}</h2>
-                      <h4>{joinedclass.code}</h4>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              ""
-            )} */}
-            <Subjects subjects = {uniqueArray}/>
+            
           </div>
           <br />
           <br />

@@ -6,5 +6,8 @@ urlpatterns = [
     path('current_user/', current_user),
     path('users/', UserList.as_view()),
     path('create/',views.CreateSubject),
-    path('join/<str:pk>',views.JoinSubject)
+    path('join/<str:pk>',views.JoinSubject),
+    path('joined/',views.JoinedSubject),
+    path('all/',views.AllSubject),
+    path('leave/<str:pk>',views.LeaveSubject),
 ]

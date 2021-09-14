@@ -95,6 +95,7 @@ render(){
                         <input onChange={this.handleChange} className="inset" value={this.state.activeItem.title} type="text" name="title" placeholder="Add Title" />
                         <input onChange={this.handleChange} className="inset" value={this.state.activeItem.author} type="text" name="author" placeholder="Add Your Name" />
                         <input onChange={this.handleChange} className="inset" value={this.state.activeItem.code} type="text" name="code" placeholder="Add Code for class"  />
+                        
                         <input className="submit-btn" type="submit" name="Add" value="create" />
                     </form>
                     </div>

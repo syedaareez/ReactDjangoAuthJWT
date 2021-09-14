@@ -1,12 +1,18 @@
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
-from .models import Subject
+from .models import Subject,JoinedClasses
 
 class joinSerializer(serializers.ModelSerializer):
     class Meta:
         model=Subject
         fields="__all__"
+        
+class joinedSerializer(serializers.ModelSerializer):
+    subjects=joinSerializer(many=True,read_only=True)
+    class Meta:
+        model=JoinedClasses
+        fields=("student","subjects")
 
 
 class UserSerializer(serializers.ModelSerializer):

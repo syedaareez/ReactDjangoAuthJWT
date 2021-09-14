@@ -3,6 +3,7 @@ import { Navbar } from "../pages/Navbar";
 import "../style/home.css";
 import JoinForm from "../pages/JoinForm";
 import CreateForm from "../pages/CreateForm";
+import Subjects from '../pages/Subjects'
 
 function Home(props) {
   const [modalOpen, setModalOpen] = useState(false)
@@ -13,7 +14,7 @@ function Home(props) {
         <br />
        <JoinForm />
       {modalOpen?(<div><CreateForm /></div>):''}
-      
+       <Subjects/>
     </div>
   );
 };

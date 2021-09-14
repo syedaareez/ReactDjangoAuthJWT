@@ -9,3 +9,10 @@ class Subject(models.Model):
     
     def __str__(self):
         return self.title
+    
+class JoinedClasses(models.Model):
+    student=models.CharField(max_length=50)
+    subjects=models.ManyToManyField(Subject)
+    def __str__(self):
+        return self.student
+    
