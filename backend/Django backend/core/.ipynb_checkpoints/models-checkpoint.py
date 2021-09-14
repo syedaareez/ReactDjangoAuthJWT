@@ -16,3 +16,10 @@ class JoinedClasses(models.Model):
     def __str__(self):
         return self.student
     
+class Messages(models.Model):
+    subcode=models.CharField(max_length=12)
+    author=models.CharField(blank=True ,max_length=50)
+    date = models.DateTimeField(auto_now_add=True,blank=True)
+    text=models.TextField(max_length=500)
+    def __str__(self):
+        return self.subcode

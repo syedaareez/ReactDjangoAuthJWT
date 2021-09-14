@@ -56,7 +56,9 @@ class Subjects extends React.Component{
                 return(
                     <div key={con.id}>
                         <h1 >{con.student}</h1>
-                        {con.subjects.map(function(sub){return(<div  className="subjects" key={sub.id}><h1 >{sub.id}</h1>
+                        {con.subjects.map(function(sub){
+                return(
+                <div onClick={()=>self.props.OpenIt(sub)} className="subjects" key={sub.id}><h1 >{sub.id}</h1>
                         <h1 >{sub.title}</h1>
                         <h1 >{sub.code}</h1>
                         <h1 >{sub.author}</h1>

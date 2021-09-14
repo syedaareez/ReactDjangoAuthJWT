@@ -4,8 +4,8 @@ from rest_framework import permissions, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserSerializer, UserSerializerWithToken, joinSerializer,joinedSerializer
-from .models import Subject,JoinedClasses
+from .serializers import UserSerializer, UserSerializerWithToken, joinSerializer,joinedSerializer,msgSerializer
+from .models import Subject,JoinedClasses,Messages
 from rest_framework.permissions import IsAuthenticated
 
 @api_view(['POST'])
@@ -19,6 +19,27 @@ def CreateSubject(request):
         joinedby=JoinedClasses.objects.get(student=request.user.username)
         joinedby.subjects.add(content)
 
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def messages(request):
+    permission_classes = (IsAuthenticated,)
+    
+    request.data["author"]=request.user.username
+    print(request.data,"Submit")
+    serializer=msgSerializer(data=request.data)
+    
+    if serializer.is_valid():
+        serializer.save()
+    
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def allMsgs(request,pk):
+    permission_classes = (IsAuthenticated,)
+    contents=Messages.objects.filter(subcode=pk)[::-1]
+    serializer=msgSerializer(contents,many=True)
+    print(contents,serializer)
     return Response(serializer.data)
 
 @api_view(['GET'])
@@ -36,9 +57,6 @@ def JoinSubject(request,pk):
 def JoinedSubject(request):
     
     permission_classes = (IsAuthenticated,)
-#     content=JoinedClasses.objects.get(student=request.user.username)
-#     contents = content.subjects.all()
-    
     contents=JoinedClasses.objects.filter(student=request.user.username)
     print(contents)
     serializer = joinedSerializer(contents, many=True )
@@ -48,9 +66,6 @@ def JoinedSubject(request):
 def AllSubject(request):
     
     permission_classes = (IsAuthenticated,)
-#     content=JoinedClasses.objects.get(student=request.user.username)
-#     contents = content.subjects.all()
-    
     contents=Subject.objects.all()
     
     serializer = joinSerializer(contents, many=True )

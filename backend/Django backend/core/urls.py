@@ -10,4 +10,6 @@ urlpatterns = [
     path('joined/',views.JoinedSubject),
     path('all/',views.AllSubject),
     path('leave/<str:pk>',views.LeaveSubject),
+    path('messages/',views.messages),
+    path('allmsgs/<str:pk>',views.allMsgs),
 ]
